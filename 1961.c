@@ -1,41 +1,38 @@
+/*
+  @autor: Malbolge;
+  @data: 28/07/2018;
+  @nome: Pula Sapo;
+*/
+
 #include <stdio.h>
-#include <string.h>
+#define TRUE 1
+#define FALSE 0
+int main ()
+{
+    unsigned short int P, N, anterior, proximo, teste, vitoria = TRUE;
+    unsigned short int i;
+    unsigned short int altura; // altura dos canos
+    scanf ("%hd %hd",&P,&N); //P: altura do pulo do sapo e N: numero de canos
+    scanf ("%hd",&altura);
+    anterior = altura;
+    for (i = 1; i < N; i++)
+    {
+        scanf ("%hd",& altura);
+        proximo = altura;
+        teste = proximo - anterior;
+        if (teste < 0)
+        {
+            teste = teste * (-1);
+        }
+        if (teste > P)
+        {
+            vitoria = FALSE;
+        }
+        anterior = proximo;
 
-int mod(int a);
-
-int main() {
-
-  int pulo, canos;
-  char altura = -1;
-
-  scanf("%d %d", &pulo, &canos);
-
-  while(canos>0) {
-
-    char cano;
-    scanf("%d", &cano);
-
-    // a logica principal da questao está aqui
-    // se o pulo do sapo, para cima ou para baixo
-    // for menor que o valor absoluto da altura a ser ultrapassada
-    // entao e fim de jogo!
-    if(pulo > mod(altura-cano)) {
-      printf("GAME OVER\n");
-      return 0;
     }
-    // se o pulo for possivel
-    // entao a nova altura do sapo, sera a altura do cano atual
-    // em relacao ao solo
-    // e passamos a ler a altura do proximo cano
-    altura = cano;
-    canos--;
-  }
-  printf("YOU WIN\n");
-  return 0;
-}
-
-int mod(int a) {
-  if(a < 0)
-    return -a;
-  return a;
+    if (vitoria == TRUE)
+        printf ("YOU WIN\n");
+    else
+        printf ("GAME OVER\n");
 }
