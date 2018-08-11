@@ -9,30 +9,33 @@
 int main ()
 {
 
-  unsigned short int n, i, j;
+  unsigned short int tamanho, linha, coluna;
 
-  do
+  while (1)
   {
 
-    scanf("%hd", &n);
-    int m[n][n];
+    scanf("%hd", &tamanho);
+    short matriz[tamanho][tamanho];
 
-    for(i = 0; i < n; i++)
-      for(j = 0; j < n; j++)
+    if (tamanho == 0)
+      return 0;
+
+    for(linha = 0; linha < tamanho; linha++)
+      for(coluna = 0; coluna < tamanho; coluna++)
       {
-        if (i == j)
-          m[i][j] = i + 1;
-        if (i + 1 == m[i][i])
-          m[i][j] = i + 1;
-        if (i > j)
-          m[i][j] = j + 1;
+        if (linha == coluna)
+          matriz[linha][coluna] = linha + 1;
+        if (linha + 1 == matriz[linha][linha])
+          matriz[linha][coluna] = linha + 1;
+        if (linha > coluna)
+          matriz[linha][coluna] = coluna + 1;
       }
 
-    for(i = 0; i < n; i++)
+    for(linha = 0; linha < tamanho; linha++)
     {
-      for(j = 0; j < n; j++)
-        printf("%d ", m[i][j]);
+      for(coluna = 0; coluna < tamanho; coluna++)
+        printf("%d ", matriz[linha][coluna]);
       printf("\n");
     }
-  } while(n != 0);
+  }
 }

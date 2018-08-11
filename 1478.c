@@ -11,7 +11,7 @@ int main ()
 
 	unsigned short int tamanho, linha, coluna;
 
-	do
+	while (1)
 	{
 
 		scanf("%hd", &tamanho);
@@ -23,15 +23,16 @@ int main ()
 		for(linha = 0; linha < tamanho; linha++)
 			for(coluna = 0; coluna < tamanho; coluna++)
 			{
-
 				if (linha == coluna)
 					matriz[linha][coluna] = 1;
 				if (linha < coluna)
-					matriz[linha][coluna] = 1 + coluna - linha;
+					matriz[linha][coluna] = coluna - linha + 1;
 				if (linha > coluna)
-					matriz[linha][coluna] = 1 + linha - coluna;
+					matriz[linha][coluna] = linha - coluna + 1;
 			}
 
+
+		//Imprime a matriz;
 		for (linha = 0; linha < tamanho; linha++)
 		{
 			for (coluna = 0; coluna < tamanho; coluna++)
@@ -48,5 +49,5 @@ int main ()
 
 		printf("\n");
 
-	} while (tamanho != 0);
+	}
 }

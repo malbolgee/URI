@@ -11,6 +11,7 @@ int main ()
 
 	unsigned short int tamanho, linha, coluna;
 
+	//Continua enquanto o arquivo não acabar (End Of File [EOF]);
 	while (scanf("%hd", &tamanho) != EOF)
 	{
 		short matriz[tamanho][tamanho];

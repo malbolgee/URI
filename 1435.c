@@ -9,13 +9,15 @@
 int main ()
 {
 
+	//Valores discretos, sem sinal;
 	unsigned short int tamanho, coluna, linha, iniMatriz, fimMatriz, elemento;
 
-	do
+	while (1)
 	{
 
 		scanf("%hd", &tamanho);
-		int m[tamanho][tamanho];
+		//Declaração de matriz de tamanho variado;
+		short m[tamanho][tamanho];
 
 		if (tamanho == 0)
 			return 0;
@@ -26,7 +28,7 @@ int main ()
 
 		while(1)
 		{
-
+			//Preenche matrizes de tamanho menor cada vez que o laço reinicia;
 			for (linha = iniMatriz; linha < fimMatriz; linha++)
 				for (coluna = iniMatriz; coluna < fimMatriz; coluna++)
 					m[linha][coluna] = elemento;
@@ -40,6 +42,7 @@ int main ()
 
 		}
 
+		//Imprime a matriz;
 		for (linha = 0; linha < tamanho; linha++)
 		{
 			for (coluna = 0; coluna < tamanho; coluna++)
@@ -56,5 +59,5 @@ int main ()
 
 		printf("\n");
 
-	}while(tamanho != 0);
+	}
 }

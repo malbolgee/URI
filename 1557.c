@@ -10,9 +10,9 @@ int main ()
 {
 
 	unsigned short int tamanho, linha, coluna;
-	long long int elemento;
+ 	int elemento;
 
-	do
+	while (1)
 	{
 
 		scanf("%hd", &tamanho);
@@ -21,7 +21,7 @@ int main ()
 		if (tamanho == 0)
 			return 0;
 
-		long int matriz[tamanho][tamanho];
+		int matriz[tamanho][tamanho];
 
 		elemento = 1;
 
@@ -42,7 +42,7 @@ int main ()
 		int t;
 
 		//Determinar o maior número da matriz
-		//Sempre vai ser o elemento da última linha/coluna;
+		//Sempre vai ser o elemento da última linha e coluna;
 		t = (matriz[tamanho - 1][tamanho - 1]);
 
 		//Conta os dígitos do maior número da matriz;
@@ -61,9 +61,9 @@ int main ()
 			{
 				if (coluna == 0)
 					//Prints com tamanho variado para o campo de espaços;
-					printf("%*ld", digitos, matriz[linha][coluna]);
+					printf("%*d", digitos, matriz[linha][coluna]);
 				else
-					printf(" %*ld", digitos, matriz[linha][coluna]);
+					printf(" %*d", digitos, matriz[linha][coluna]);
 			}
 
 			printf("\n");
@@ -71,5 +71,5 @@ int main ()
 
 		printf("\n");
 
-	} while (tamanho != 0);
+	}
 }
