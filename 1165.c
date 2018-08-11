@@ -25,7 +25,7 @@ int main()
   if (x > 2 && x % 2 == 0 || x <= 1)
    primo = FALSE;
 
-  for (unsigned short i = 3; primo == TRUE && i <= x/2; i += 2)
+  for (int i = 3; primo == TRUE && i <= x/2; i += 2)
     if (x % i == 0)
       primo = FALSE;
 
