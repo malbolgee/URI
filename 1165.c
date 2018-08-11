@@ -1,26 +1,37 @@
+/*
+  @autor: Micael Viana;
+  @data: 11/08/2018;
+  @nome: Número Primo;
+*/
+
 #include <stdio.h>
+#define FALSE 0
+#define TRUE 1
 
-int main ()
+int main()
 {
+ int x;
+ unsigned short n;
+ unsigned char primo;
 
-  unsigned short int n, i, x, k, cont = 0;
+ scanf ("%hd",&n);
 
-  scanf("%hd", &x);
+ for (unsigned short i = 0; i < n; i++)
+ {
 
-  for (k = 0; k < x; k++)
-  {
+  primo = TRUE;
+  scanf ("%d",&x);
 
-    scanf("%hd", &n);
+  if (x > 2 && x % 2 == 0 || x <= 1)
+   primo = FALSE;
 
-    for (i = 1; i <= n; i++)
-      if (n % i == 0)
-        cont++;
+  for (unsigned short i = 3; primo == TRUE && i <= x/2; i += 2)
+    if (x % i == 0)
+      primo = FALSE;
 
-  if (cont != 2)
-    printf("%d nao eh primo\n", n);
+  if (primo)
+   printf ("%d eh primo\n",x);
   else
-    printf("%d eh primo\n", n);
-
-  cont = 0;
-  }
+   printf("%d nao eh primo\n",x);
+ }
 }
