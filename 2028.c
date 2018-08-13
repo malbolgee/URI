@@ -17,29 +17,39 @@ int main ()
     if (numero == 0)
     {
 
-      printf("Caso 1: 1 numero\n");
+      printf("Caso %d: 1 numero\n", caso);
+      caso++;
       printf("0\n");
 
     }
     else
     {
+      
+      for (i = 0; i <= numero; i++)
+        for (j = i, k = 1; k <= i; k++)
+          cont++;
 
+      caso++;
+      printf("Caso %d: %d numeros\n", caso, cont+1);
       for(i = 0; i <= numero; i++)
       {
 
         if (i == 0)
-          printf("0 ");
-        if (i == numero)
-          printf("Caso %d: %d numeros\n", caso, cont);
+          printf("0");
 
         for (j = i, k = 1; k <= i; k++)
         {
 
-          printf("%d ", j);
+          printf(" %d", j);
           cont++;
 
         }
       }
+
+      printf("\n");
+      printf("\n");
+      cont = 0;
+
     }
   }
 }
