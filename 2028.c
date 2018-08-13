@@ -9,17 +9,16 @@
 int main ()
 {
 
-  int numero, i, j, k, cont = 0, caso = 0;
-
-  while (scanf("%d", &numero) != EOF)
+  register unsigned short numero, i, j, k, cont = 0, caso = 0;
+   
+  while (scanf("%hd", &numero) != EOF)
   {
 
     if (numero == 0)
     {
-
-      printf("Caso %d: 1 numero\n", caso);
       caso++;
-      printf("0\n");
+      printf("Caso %d: 1 numero\n", caso);
+      printf("0\n\n");
 
     }
     else
@@ -31,6 +30,7 @@ int main ()
 
       caso++;
       printf("Caso %d: %d numeros\n", caso, cont+1);
+
       for(i = 0; i <= numero; i++)
       {
 
@@ -46,8 +46,7 @@ int main ()
         }
       }
 
-      printf("\n");
-      printf("\n");
+      printf("\n\n");
       cont = 0;
 
     }
