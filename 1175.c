@@ -9,12 +9,13 @@
 int main ()
 {
 
-  int n, i, j, x[20], aux1, aux2;
+  unsigned short n, i, j, aux1, aux2;
+  short x[20];
 
   for (i = 0; i < 20; i++)
   {
 
-    scanf("%d", &n);
+    scanf("%hd", &n);
     x[i] = n;
 
   }
