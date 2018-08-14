@@ -6,11 +6,14 @@
 
 #include <stdio.h>
 
+int contagem(int);
+
+
 int main ()
 {
 
-  register unsigned short numero, i, j, k, cont = 0, caso = 0;
-   
+  unsigned short numero, i, j, k, cont = 0, caso = 0;
+
   while (scanf("%hd", &numero) != EOF)
   {
 
@@ -23,14 +26,9 @@ int main ()
     }
     else
     {
-      
-      for (i = 0; i <= numero; i++)
-        for (j = i, k = 1; k <= i; k++)
-          cont++;
 
       caso++;
-      printf("Caso %d: %d numeros\n", caso, cont+1);
-
+      printf("Caso %d: %d numeros\n", caso, contagem(numero));
       for(i = 0; i <= numero; i++)
       {
 
@@ -38,12 +36,8 @@ int main ()
           printf("0");
 
         for (j = i, k = 1; k <= i; k++)
-        {
-
           printf(" %d", j);
-          cont++;
 
-        }
       }
 
       printf("\n\n");
@@ -51,4 +45,15 @@ int main ()
 
     }
   }
+}
+
+int contagem(int a)
+{
+
+  unsigned short soma = 0, i;
+
+  for (i = a; i > 0; i--)
+    soma += i;
+
+  return ++soma;
 }
