@@ -9,8 +9,8 @@
 int main ()
 {
 
-  unsigned short n, i, j, aux1, aux2;
-  short x[20];
+  unsigned short i, j;
+  short x[20], n, aux1, aux2;
 
   for (i = 0; i < 20; i++)
   {
@@ -31,9 +31,6 @@ int main ()
   }
 
   for (i = 0; i < 20; i++)
-  {
-
     printf("N[%d] = %d\n", i, x[i]);
 
-  }
 }
