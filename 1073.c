@@ -1,6 +1,12 @@
+/*
+  @autor: Malbolge;
+  @data: 22/07/2018;
+  @nome: Quadrado de Pares;
+*/
+
+
 #include <stdio.h>
 #include <math.h>
-
 
 int main () {
 
