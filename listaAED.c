@@ -4,8 +4,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <time.h>
-#define n 5
+
 
 int fatorial(short);
 void mod_vetor(short vet[], unsigned short);
@@ -18,28 +17,27 @@ void verificaPalin(char nome[]);
 void vetSub(short vet[], unsigned short vetTam, short delta);
 void vetSubPosi(short vet[], unsigned short vetTam);
 void revertSubPosi(short vet[], unsigned short vetTam);
-void matrixBool(short matriz[5][5], short numero);
-void matrix (unsigned short ordem);
-
+int fib(unsigned short numero);
+void invertString(char string[]);
+int buscaBin(short vetor[], short chave);
 
 int main ()
 {
 
-	unsigned short elemento;
+	unsigned short elemento, n;
 	short vetor[] = { 15, 2, 9, -5 , -7, 0, 3, 1, 2, 16, 4 }; //Tamanho 11;
 	short vetor2[] = { 15, 2, 9, -5 , -7, 0, 3, 1, 2, 16, 4 }; // tamanho 11;
 	short vetorOrdem[] = { 1, 3, 5, 7, 11, 13, 15, 17, 19 };
 	short vetorOrdem2[] = { 1, 3, 5, 7, 11, 13, 15, 17, 19 }; // Tamanho 9;
 	short vetorDesord[] = { 19, 17, 15, 13, 13, 11, 7, 5, 3 };
-	char string[] = "arara";
+	short vetorBuscaBin[] = { 1, 3, 5, 7, 11, 13, 15, 17, 19 };
+	char string[] = "TORRINOLARINGOLOGISTA";
 	char nome[] = "arara";
 
 	scanf("%hd", &elemento);
-	printf("Fatorial do numero: %d é %d\n", elemento, fatorial(elemento));
-	puts("Vetor Original: ");
-	press(vetor, 11);
+	printf("Questão 1: %d é %d\n", elemento, fatorial(elemento));
 	vet_invet(vetor, 11);
-	puts("Vetor Invertido:");
+	puts("Questão 3: ");
 	press(vetor, 11);
 	mod_vetor(vetor, 11);
 	puts("Vetor Modificado:");
@@ -49,12 +47,11 @@ int main ()
 	press(vetorDesord, 9);
 	vetOrdVerfi(vetorDesord, 9);
 	puts("Soma de todos os quadrados");
-	printf("%d\n", calcQuadrado(10));
-	printf("Quantidade de letras 'a' da String: %s\n", string);
+	printf("%d\n", calcQuadrado(elemento));
+	puts("Questão 8: ");
 	printf("%d\n", contaLetra(string, 'a'));
-	puts("String Reversa:");
+	puts("Questão 9: ");
 	verificaPalin(nome);
-	printf("%s\n", nome);
 	puts("Questão 11:");
 	vetSub(vetor2, 11, 5);
 	press(vetor2, 11);
@@ -64,12 +61,17 @@ int main ()
 	puts("Questão 13: ");
 	revertSubPosi(vetorOrdem2, 9);
 	press(vetorOrdem2, 9);
-	printf("\n");
-	matrix(n);
+	puts("Questão 20: ");
+	printf("%d\n", fib(elemento));
+	puts("Questão 10:");
+	printf("%d\n", buscaBin(vetorBuscaBin, 6));
+
+
 
 
 }
 
+//Questão 1;
 int fatorial (short numero)
 {
 
@@ -86,6 +88,7 @@ int fatorial (short numero)
 
 }
 
+//Questão 2;
 void mod_vetor(short vet[], unsigned short vetTam)
 {
 
@@ -103,6 +106,7 @@ void mod_vetor(short vet[], unsigned short vetTam)
 
 }
 
+
 void press(short vet[], unsigned short vetTam)
 {
 
@@ -113,22 +117,27 @@ void press(short vet[], unsigned short vetTam)
 
 }
 
+
+//questão 3;
 void vet_invet(short vet[], unsigned short vetTam)
 {
 
-	unsigned short i, j, aux1, aux2;
+	unsigned short i, j, aux, tam;
 
-	for (i = 0, j = vetTam -1; i <= vetTam/2 && j >= vetTam/2; i++, j--)
+	tam = vetTam / 2;
+
+	for (i = 0, j = vetTam - 1; i < tam; i++, j--)
 	{
 
-		aux1 = vet[i];
-	    aux2 = vet[j];
-	    vet[i] = aux2;
-	    vet[j] = aux1;
+		aux = vet[j];
+		vet[j] = vet[i];
+		vet[i] = aux;
 
 	}
 }
 
+
+//Questão 5;
 void vetOrdVerfi (short vet[], unsigned short vetTam)
 {
 
@@ -148,10 +157,13 @@ void vetOrdVerfi (short vet[], unsigned short vetTam)
 
 }
 
+
+//Questão 7;
 unsigned short calcQuadrado(unsigned short numero)
 {
 
 	unsigned short quadrado = 0, i;
+
 	for (i = numero; i > 0; i--)
 		quadrado += (int)pow(i, 2);
 
@@ -159,42 +171,32 @@ unsigned short calcQuadrado(unsigned short numero)
 
 }
 
+//Questão 8;
 unsigned short contaLetra(char string[], char letra)
 {
 
-	unsigned short i, contador = 0;
+	unsigned short i, contador = 0, tam;
 
-	for (i = 0; i < strlen(string); i++)
-		string[i] = toupper(string[i]);
+	tam = strlen(string);
 
-	letra = toupper(letra);
-
-	for (i = 0; i < strlen(string); i++)
-		if (string[i] == letra)
+	for (i = 0; i < tam; i++)
+		if (string[i] == letra || string[i] == letra - 32)
 			contador++;
 
 	return contador;
 
 }
 
+//Questão 9;
 void verificaPalin(char nome[])
 {
 
-	unsigned short i,j;
 	unsigned char aux, aux2, copianome[strlen(nome)];
+	short i, j;
 
+	strcpy(copianome, nome);
 
-	for (i = 0; i < strlen(nome); i++)
-		copianome[i] = nome[i];
-
-
-	for (i = 0, j = strlen(copianome) - 1; i <= strlen(copianome)/2 && j >= strlen(copianome)/2; i++, j--)
-	{
-		aux = copianome[i];
-		aux2 = copianome[j];
-		copianome[j] = aux;
-		copianome[i] = aux2;
-	}
+	invertString(copianome);
 
 	if (strcmp(nome, copianome) == 0)
 		printf("True\n");
@@ -203,6 +205,8 @@ void verificaPalin(char nome[])
 
 }
 
+
+//Questão 11;
 void vetSub(short vet[], unsigned short vetTam, short delta)
 {
 
@@ -213,6 +217,7 @@ void vetSub(short vet[], unsigned short vetTam, short delta)
 
 }
 
+//Questão 12;
 void vetSubPosi(short vet[], unsigned short vetTam)
 {
 
@@ -223,6 +228,8 @@ void vetSubPosi(short vet[], unsigned short vetTam)
 
 }
 
+
+//Questão 13;
 void revertSubPosi(short vet[], unsigned short vetTam)
 {
 
@@ -233,34 +240,62 @@ void revertSubPosi(short vet[], unsigned short vetTam)
 	
 }
 
-void matrix(unsigned short ordem)
+
+//Questão 20;
+int fib(unsigned short numero)
 {
 
-	short matriz[ordem][ordem];
-	unsigned short int linha, coluna;
+	int resultado = 0;
+	unsigned short i;
 
-
-	for (linha = 0; linha < ordem; linha++)
-		for(coluna = 0; coluna < ordem; coluna++)
-			matriz[linha][coluna] = (rand() % 10);
-
-	for (linha = 0; linha < ordem; linha++)
+	if (numero == 1)
+		return 0;
+	else if (numero == 2)
+		return 1;
+	else if (numero == 3)
+		return 1;
+	else
 	{
-		for(coluna = 0; coluna < ordem; coluna++)
-			printf("%d ", matriz[linha][coluna]);
-		printf("\n");
+		for (i = 0; i < numero; i++)
+			resultado = (1/sqrt(5))*pow(((1+sqrt(5))/2), i)-(1/sqrt(5))*pow(((1-sqrt(5))/2), i);
+		return resultado;
 	}
-	printf("\n");
-
-
 }
 
-void matrixBool(short matriz[n][n], short numero)
+void invertString(char string[])
 {
 
-	
-	
+	unsigned short i, j, tam, tam2;
+	char aux;
 
+	tam = strlen(string) / 2;
+	tam2 = strlen(string);
 
+	for (i = 0, j = tam2 - 1; i < tam; i++, j--)
+	{
 
+		aux = string[j];
+		string[j] = string[i];
+		string[i] = aux;
+
+	}
+}
+
+int buscaBin(short vetor[10], short chave)
+{
+
+	short menor = 0, maior = 9, meio;
+
+	while (menor <= maior)
+	{
+		meio = (menor + maior) / 2;
+		if (vetor[meio] < chave)
+			maior = meio + 1;
+		if (vetor[meio] > chave)
+			menor = meio - 1;
+		if (vetor[meio] == chave)
+			return chave;
+
+	}
+	return -1;
 }
