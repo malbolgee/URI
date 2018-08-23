@@ -118,7 +118,7 @@ void mod_vetor(short vet[], unsigned short vetTam)
 
 }
 
-
+// Imrime um vetor;
 void press(short vet[], unsigned short vetTam)
 {
 
@@ -201,11 +201,9 @@ unsigned short contaLetra(char string[], char letra)
 void verificaPalin(char nome[])
 {
 
-	unsigned char aux, aux2, copianome[strlen(nome)];
-	short i, j;
+	char copianome[strlen(nome)];
 
 	strcpy(copianome, nome);
-
 	invertString(copianome);
 
 	if (strcmp(nome, copianome) == 0)
@@ -271,6 +269,7 @@ int fib(unsigned short numero)
 	}
 }
 
+//Função que inverte uma string;
 void invertString(char string[])
 {
 
@@ -309,7 +308,7 @@ char buscaBin(short vetor[], short chave, short vetTam)
 	return 1;
 }
 
-
+//Questão 15;
 char matrix(int matriz[matrixSize][matrixSize], short elemento)
 {
 
@@ -327,6 +326,7 @@ char matrix(int matriz[matrixSize][matrixSize], short elemento)
 
 }
 
+//Imprimir uma Matriz;
 void pressMatrix(int matriz[matrixSize][matrixSize])
 {
 
@@ -341,6 +341,7 @@ void pressMatrix(int matriz[matrixSize][matrixSize])
   printf("\n");
 }
 
+//Preenche uma matriz com valores aleatórios;
 void matrixGenerator(int matriz[][matrixSize])
 {
 
@@ -353,6 +354,7 @@ void matrixGenerator(int matriz[][matrixSize])
 
 }
 
+//Questão 16;
 short matrixMajor(int matriz[][matrixSize])
 {
 
@@ -369,6 +371,7 @@ short matrixMajor(int matriz[][matrixSize])
 
 }
 
+//Questão 17;
 short matrixSumDiago(int matriz[][matrixSize])
 {
 
