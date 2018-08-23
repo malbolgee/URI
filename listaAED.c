@@ -27,6 +27,7 @@ void matrixGenerator(int matriz[][matrixSize]);
 short matrixMajor(int matriz[][matrixSize]);
 short matrixSumDiago(int matriz[][matrixSize]);
 void insertionSort(short vet[], unsigned short vetTam);
+float desvioPadrao(float vet[], unsigned short vetTam);
 
 int main ()
 {
@@ -38,7 +39,8 @@ int main ()
 	short vetorOrdem2[] = { 1, 3, 5, 7, 11, 13, 15, 17, 19 }; // Tamanho 9;
 	short vetorDesord[] = { 19, 17, 15, 13, 13, 11, 7, 5, 3 };
 	short vetorBuscaBin[] = { 1, 3, 3, 7, 11, 11, 12, 15, 17, 19, 20, 21 }; //Tamanho 12;
-	short vetorinsertion[] = { 15, 2, 9, -5 , -7, 0, 3, 1, 2, 16, 4 }; // Tamanho 11;
+	short vetorinsertion[] = { 15, 2, 9, -5 , -7, 0, 3, 1, 2, 16, 4 };
+	float vetordesvio[] = { 1.55, 1.70, 1.80 }; // Tamanho 10;
   	int matriz[matrixSize][matrixSize] = { 0 };
 	char string[] = "OTORRINOLARINGOLOGISTA";
 	char nome[] = "arara";
@@ -88,6 +90,7 @@ int main ()
   	press(vetorinsertion, 11);
   	insertionSort(vetorinsertion, 11);
   	press(vetorinsertion, 11);
+    printf("%f\n", desvioPadrao(vetordesvio, 3));
 
 }
 
@@ -305,6 +308,7 @@ char buscaBin(short vetor[], short chave, short vetTam)
 	while (primeiro <= ultimo)
 	{
 		meio = (primeiro + ultimo) / 2;
+
 		if (vetor[meio] == chave)
 		{
 
@@ -326,7 +330,7 @@ char buscaBin(short vetor[], short chave, short vetTam)
 }
 
 //Questão 15;
-char matrix(int matriz[matrixSize][matrixSize], short elemento)
+char matrix(int matriz[][matrixSize], short elemento)
 {
 
   unsigned short contador = 0, linha, coluna;
@@ -344,7 +348,7 @@ char matrix(int matriz[matrixSize][matrixSize], short elemento)
 }
 
 //Imprimir uma Matriz;
-void pressMatrix(int matriz[matrixSize][matrixSize])
+void pressMatrix(int matriz[][matrixSize])
 {
 
   unsigned short linha, coluna;
@@ -375,7 +379,8 @@ void matrixGenerator(int matriz[][matrixSize])
 short matrixMajor(int matriz[][matrixSize])
 {
 
-  unsigned short linha, coluna, maior;
+  unsigned short linha, coluna;
+  short maior;
 
   maior = matriz[0][0];
 
@@ -414,19 +419,37 @@ void insertionSort(short vet[], unsigned short vetTam)
 	{
 		pivot = vet[i];
 		j = i - 1;
-		//printf("%d\n", pivot);
 
 		while (j >= 0 && vet[j] > pivot)
 		{
-			//printf("TESTE\n");
-			//printf("esse é o vet[j + 1]: %d\n", vet[j + 1]);
+
 			vet[j + 1] = vet[j];
 			j--;
 			
-			//printf("esse é o j: %d\n", j);
 		}
-		//printf("TESTE 2\n");
+
 		vet[j + 1] = pivot;
 		i++;
 	}
+}
+
+
+float desvioPadrao(float vet[], unsigned short vetTam)
+{
+
+	unsigned short i;
+	float media, desvio = 0, soma = 0;
+
+	for (i = 0; i < vetTam; i++)
+		soma += vet[i];
+
+	media = soma/vetTam;
+
+	for (i = 0; i < vetTam; i++)
+		desvio += pow((vet[i] - media), 2);
+
+	desvio = sqrt(desvio/vetTam);
+
+	return desvio;
+
 }
