@@ -28,6 +28,7 @@ short matrixMajor(int matriz[][matrixSize]);
 short matrixSumDiago(int matriz[][matrixSize]);
 void insertionSort(short vet[], unsigned short vetTam);
 float desvioPadrao(float vet[], unsigned short vetTam);
+float mediana(float vet[], unsigned short vetTam);
 
 int main ()
 {
@@ -40,7 +41,8 @@ int main ()
 	short vetorDesord[] = { 19, 17, 15, 13, 13, 11, 7, 5, 3 };
 	short vetorBuscaBin[] = { 1, 3, 3, 7, 11, 11, 12, 15, 17, 19, 20, 21 }; //Tamanho 12;
 	short vetorinsertion[] = { 15, 2, 9, -5 , -7, 0, 3, 1, 2, 16, 4 };
-	float vetordesvio[] = { 1.55, 1.70, 1.80 }; // Tamanho 10;
+	float vetordesvio[] = { 1.55, 1.70, 1.80 };
+	float vetormediana[] = {1,3,0,0,2,4,1,2,5};
   	int matriz[matrixSize][matrixSize] = { 0 };
 	char string[] = "OTORRINOLARINGOLOGISTA";
 	char nome[] = "arara";
@@ -91,6 +93,7 @@ int main ()
   	insertionSort(vetorinsertion, 11);
   	press(vetorinsertion, 11);
     printf("%f\n", desvioPadrao(vetordesvio, 3));
+    printf("%f\n", mediana(vetormediana, 9));
 
 }
 
@@ -433,7 +436,7 @@ void insertionSort(short vet[], unsigned short vetTam)
 	}
 }
 
-
+//Questão 18;
 float desvioPadrao(float vet[], unsigned short vetTam)
 {
 
@@ -451,5 +454,20 @@ float desvioPadrao(float vet[], unsigned short vetTam)
 	desvio = sqrt(desvio/vetTam);
 
 	return desvio;
+
+}
+
+//Questão 19;
+float mediana(float vet[], unsigned short vetTam)
+{
+
+	float mediana = 0;
+	unsigned short i;
+
+	for (i = 0; i < vetTam; i++)
+		mediana += vet[i];
+
+	return (round(mediana/vetTam));
+
 
 }
