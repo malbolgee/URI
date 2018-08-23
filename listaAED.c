@@ -26,6 +26,7 @@ void pressMatrix(int matriz[][matrixSize]);
 void matrixGenerator(int matriz[][matrixSize]);
 short matrixMajor(int matriz[][matrixSize]);
 short matrixSumDiago(int matriz[][matrixSize]);
+void insertionSort(short vet[], unsigned short vetTam);
 
 int main ()
 {
@@ -36,8 +37,9 @@ int main ()
 	short vetorOrdem[] = { 1, 3, 5, 7, 11, 13, 15, 17, 19 };
 	short vetorOrdem2[] = { 1, 3, 5, 7, 11, 13, 15, 17, 19 }; // Tamanho 9;
 	short vetorDesord[] = { 19, 17, 15, 13, 13, 11, 7, 5, 3 };
-	short vetorBuscaBin[] = { 1, 3, 3, 7, 11, 12, 12, 15, 17, 19, 20, 21 }; //Tamanho 12;
-  int matriz[matrixSize][matrixSize] = { 0 };
+	short vetorBuscaBin[] = { 1, 3, 3, 7, 11, 11, 12, 15, 17, 19, 20, 21 }; //Tamanho 12;
+	short vetorinsertion[] = {5,8,9,7,0,1,6,5,4,8,9,7}; // Tamanho 12;
+  	int matriz[matrixSize][matrixSize] = { 0 };
 	char string[] = "OTORRINOLARINGOLOGISTA";
 	char nome[] = "arara";
 
@@ -72,14 +74,16 @@ int main ()
 	printf("%d\n", fib(elemento));
 	puts("Questão 10:");
 	printf("%d\n", buscaBin(vetorBuscaBin, 12, 12));
-  puts("Questão 15: ");
-  matrixGenerator(matriz);
-  printf("%d\n", matrix(matriz, 6));
-  pressMatrix(matriz);
-  puts("Questão 16: ");
-  printf("%d\n", matrixMajor(matriz));
-  puts("Questão 17: ");
-  printf("%d\n", matrixSumDiago(matriz));
+  	puts("Questão 15: ");
+  	matrixGenerator(matriz);
+  	printf("%d\n", matrix(matriz, 6));
+  	pressMatrix(matriz);
+  	puts("Questão 16: ");
+  	printf("%d\n", matrixMajor(matriz));
+  	puts("Questão 17: ");
+  	printf("%d\n", matrixSumDiago(matriz));
+  	insertionSort(vetorinsertion, 12);
+  	press(vetor, 12);
 
 }
 
@@ -297,15 +301,24 @@ char buscaBin(short vetor[], short chave, short vetTam)
 	while (primeiro <= ultimo)
 	{
 		meio = (primeiro + ultimo) / 2;
-		if (vetor[meio] == chave && (vetor[meio - 1] == chave || vetor[meio + 1] == chave))
-			return 0;
-		else if (chave < vetor[meio])
+		if (vetor[meio] == chave)
+		{
+
+			if (vetor[meio - 1] == chave || vetor[meio + 1] == chave)
+				return 0;
+			else
+				return 1;
+
+		}
+
+		if (chave < vetor[meio])
 			ultimo = meio - 1;
 		else
 			primeiro = meio + 1;
 
 	}
-	return 1;
+
+	return 0;
 }
 
 //Questão 15;
@@ -384,5 +397,26 @@ short matrixSumDiago(int matriz[][matrixSize])
         soma += matriz[linha][coluna];
 
   return soma;
+
+}
+
+void insertionSort(short vet[], unsigned short vetTam)
+{
+
+	unsigned short i = 1, pivot, j;
+
+	while (i < vetTam + 1)
+	{
+
+		pivot = i;
+		j = i - 1;
+		while ( j >= 0 && (vet[j] > pivot))
+		{
+			vet[j + 1] = vet[j];
+			j--;
+		}
+		vet[j+1] = pivot;
+		i++;
+	}
 
 }
