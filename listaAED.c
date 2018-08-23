@@ -2,9 +2,10 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
+#include <time.h>
 #include <stdlib.h>
-#include <ctype.h>
 
+#define matrixSize 5
 
 int fatorial(short);
 void mod_vetor(short vet[], unsigned short);
@@ -19,7 +20,12 @@ void vetSubPosi(short vet[], unsigned short vetTam);
 void revertSubPosi(short vet[], unsigned short vetTam);
 int fib(unsigned short numero);
 void invertString(char string[]);
-int buscaBin(short vetor[], short chave);
+char buscaBin(short vetor[], short chave, short vetTam);
+char matrix(int matriz[][matrixSize], short elemento);
+void pressMatrix(int matriz[][matrixSize]);
+void matrixGenerator(int matriz[][matrixSize]);
+short matrixMajor(int matriz[][matrixSize]);
+short matrixSumDiago(int matriz[][matrixSize]);
 
 int main ()
 {
@@ -30,8 +36,9 @@ int main ()
 	short vetorOrdem[] = { 1, 3, 5, 7, 11, 13, 15, 17, 19 };
 	short vetorOrdem2[] = { 1, 3, 5, 7, 11, 13, 15, 17, 19 }; // Tamanho 9;
 	short vetorDesord[] = { 19, 17, 15, 13, 13, 11, 7, 5, 3 };
-	short vetorBuscaBin[] = { 1, 3, 5, 7, 11, 13, 15, 17, 19 };
-	char string[] = "TORRINOLARINGOLOGISTA";
+	short vetorBuscaBin[] = { 1, 3, 3, 7, 11, 12, 12, 15, 17, 19, 20, 21 }; //Tamanho 12;
+  int matriz[matrixSize][matrixSize] = { 0 };
+	char string[] = "OTORRINOLARINGOLOGISTA";
 	char nome[] = "arara";
 
 	scanf("%hd", &elemento);
@@ -64,10 +71,15 @@ int main ()
 	puts("Questão 20: ");
 	printf("%d\n", fib(elemento));
 	puts("Questão 10:");
-	printf("%d\n", buscaBin(vetorBuscaBin, 6));
-
-
-
+	printf("%d\n", buscaBin(vetorBuscaBin, 12, 12));
+  puts("Questão 15: ");
+  matrixGenerator(matriz);
+  printf("%d\n", matrix(matriz, 6));
+  pressMatrix(matriz);
+  puts("Questão 16: ");
+  printf("%d\n", matrixMajor(matriz));
+  puts("Questão 17: ");
+  printf("%d\n", matrixSumDiago(matriz));
 
 }
 
@@ -95,7 +107,7 @@ void mod_vetor(short vet[], unsigned short vetTam)
 	unsigned short i;
 
 	for (i = 0; i < vetTam; i++)
-	{	
+	{
 		if (vet[i] <= 0)
 			vet[i] = -2;
 		else if (vet[i] >= 1 && vet[i] <= 5)
@@ -136,16 +148,15 @@ void vet_invet(short vet[], unsigned short vetTam)
 	}
 }
 
-
 //Questão 5;
 void vetOrdVerfi (short vet[], unsigned short vetTam)
 {
 
 	unsigned short i, menor;
 	char condicao = true;
-	
+
 	menor = vet[0];
-	
+
 	for (i = 1; i < vetTam && condicao == true; i++)
 		if (vet[i] < menor)
 			condicao = false;
@@ -156,7 +167,6 @@ void vetOrdVerfi (short vet[], unsigned short vetTam)
 		puts("False");
 
 }
-
 
 //Questão 7;
 unsigned short calcQuadrado(unsigned short numero)
@@ -237,9 +247,8 @@ void revertSubPosi(short vet[], unsigned short vetTam)
 
 	for (i = vetTam - 1; i > 0; i--)
 		vet[i] = vet[i] + vet[i - 1];
-	
-}
 
+}
 
 //Questão 20;
 int fib(unsigned short numero)
@@ -280,22 +289,97 @@ void invertString(char string[])
 
 	}
 }
-
-int buscaBin(short vetor[10], short chave)
+//Questão 10;
+char buscaBin(short vetor[], short chave, short vetTam)
 {
 
-	short menor = 0, maior = 9, meio;
+	short primeiro = 0, ultimo = vetTam - 1, meio, contador = 0;
 
-	while (menor <= maior)
+	while (primeiro <= ultimo)
 	{
-		meio = (menor + maior) / 2;
-		if (vetor[meio] < chave)
-			maior = meio + 1;
-		if (vetor[meio] > chave)
-			menor = meio - 1;
-		if (vetor[meio] == chave)
-			return chave;
+		meio = (primeiro + ultimo) / 2;
+		if (vetor[meio] == chave && (vetor[meio - 1] == chave || vetor[meio + 1] == chave))
+			return 0;
+		else if (chave < vetor[meio])
+			ultimo = meio - 1;
+		else
+			primeiro = meio + 1;
 
 	}
-	return -1;
+	return 1;
+}
+
+
+char matrix(int matriz[matrixSize][matrixSize], short elemento)
+{
+
+  unsigned short contador = 0, linha, coluna;
+
+  for (linha = 0; linha < matrixSize; linha++)
+    for(coluna = 0; coluna < matrixSize; coluna++)
+      if (matriz[linha][coluna] == elemento)
+        contador++;
+
+  if (contador == 4)
+    return 1;
+  else
+    return 0;
+
+}
+
+void pressMatrix(int matriz[matrixSize][matrixSize])
+{
+
+  unsigned short linha, coluna;
+
+  for (linha = 0; linha < matrixSize; linha++)
+  {
+    for(coluna = 0; coluna < matrixSize; coluna++)
+      printf("%d ", matriz[linha][coluna]);
+    printf("\n");
+  }
+  printf("\n");
+}
+
+void matrixGenerator(int matriz[][matrixSize])
+{
+
+  srand(time(NULL));
+  unsigned short linha, coluna;
+
+  for(linha = 0; linha < matrixSize; linha++)
+    for(coluna = 0; coluna < matrixSize; coluna++)
+      matriz[linha][coluna] = (rand() % 10);
+
+}
+
+short matrixMajor(int matriz[][matrixSize])
+{
+
+  unsigned short linha, coluna, maior;
+
+  maior = matriz[0][0];
+
+  for (linha = 1; linha < matrixSize; linha++)
+    for (coluna = 1; coluna < matrixSize; coluna++)
+      if (matriz[linha][coluna] > maior)
+        maior = matriz[linha][coluna];
+
+  return maior;
+
+}
+
+short matrixSumDiago(int matriz[][matrixSize])
+{
+
+  short soma = 0;
+  unsigned short linha, coluna;
+
+  for (linha = 0; linha < matrixSize; linha++)
+    for (coluna = 0; coluna < matrixSize; coluna++)
+      if (linha == matrixSize - coluna - 1)
+        soma += matriz[linha][coluna];
+
+  return soma;
+
 }
