@@ -38,11 +38,12 @@ int main ()
 	short vetorOrdem2[] = { 1, 3, 5, 7, 11, 13, 15, 17, 19 }; // Tamanho 9;
 	short vetorDesord[] = { 19, 17, 15, 13, 13, 11, 7, 5, 3 };
 	short vetorBuscaBin[] = { 1, 3, 3, 7, 11, 11, 12, 15, 17, 19, 20, 21 }; //Tamanho 12;
-	short vetorinsertion[] = {5,8,9,7,0,1,6,5,4,8,9,7}; // Tamanho 12;
+	short vetorinsertion[] = { 15, 2, 9, -5 , -7, 0, 3, 1, 2, 16, 4 }; // Tamanho 11;
   	int matriz[matrixSize][matrixSize] = { 0 };
 	char string[] = "OTORRINOLARINGOLOGISTA";
 	char nome[] = "arara";
 
+	/*
 	scanf("%hd", &elemento);
 	printf("Questão 1: %d é %d\n", elemento, fatorial(elemento));
 	vet_invet(vetor, 11);
@@ -82,8 +83,11 @@ int main ()
   	printf("%d\n", matrixMajor(matriz));
   	puts("Questão 17: ");
   	printf("%d\n", matrixSumDiago(matriz));
-  	insertionSort(vetorinsertion, 12);
-  	press(vetor, 12);
+  	*/
+  	puts("Questão 6: ");
+  	press(vetorinsertion, 11);
+  	insertionSort(vetorinsertion, 11);
+  	press(vetorinsertion, 11);
 
 }
 
@@ -400,23 +404,29 @@ short matrixSumDiago(int matriz[][matrixSize])
 
 }
 
+//Questão 6;
 void insertionSort(short vet[], unsigned short vetTam)
 {
 
-	unsigned short i = 1, pivot, j;
+	short i = 1, j, pivot;
 
-	while (i < vetTam + 1)
+	while (i < vetTam)
 	{
-
-		pivot = i;
+		pivot = vet[i];
 		j = i - 1;
-		while ( j >= 0 && (vet[j] > pivot))
+		//printf("%d\n", pivot);
+
+		while (j >= 0 && vet[j] > pivot)
 		{
+			//printf("TESTE\n");
+			//printf("esse é o vet[j + 1]: %d\n", vet[j + 1]);
 			vet[j + 1] = vet[j];
 			j--;
+			
+			//printf("esse é o j: %d\n", j);
 		}
-		vet[j+1] = pivot;
+		//printf("TESTE 2\n");
+		vet[j + 1] = pivot;
 		i++;
 	}
-
 }
