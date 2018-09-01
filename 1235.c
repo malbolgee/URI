@@ -14,13 +14,18 @@ int main (){
 	unsigned casos, i;
 
 	scanf("%u", &casos);
-	//variável c recebe o \n do scanf de "casos";
-	scanf("%c",&c);
+
+	// Limpar o buffer para a próxima entrada;
+	setbuf(stdin, NULL);
 
 	while (casos)
 	{	
 		//"%[\^n]" para o problema dos espaços;
 		scanf("%[^\n]", texto);
+
+		// Limpar o buffer para o laço não entrar em um loop;
+		setbuf(stdin, NULL);
+		
 		tam = strlen(texto);
 		metadeTam = tam/2;
 
@@ -32,10 +37,7 @@ int main (){
 
 
 		printf("\n");
-		//o último \n vai para a variável C a fim resetar o buffer;
-		//Caso contrário, laço entraria num loop;
-		scanf("%c", &c);
-
+		
 	casos--;
 	}
 }
