@@ -19,24 +19,20 @@ void main (void)
 	scanf("%u", &casos);
 	int impares[casos], pares[casos];
 
-	while (casos)
+	while (casos--)
 	{
 		scanf("%u", &numero);
 
 		if (numero % 2 == 0)
 		{	
 			tamanhoPares++;
-			pares[i] = numero;
-			i++;
+			pares[i++] = numero;
 		}
 		else
 		{	
 			tamanhoImpares++;
-			impares[j] = numero;
-			j++;
+			impares[j++] = numero;
 		}
-
-		casos--;
 	}
 
 	mergeSort(pares, 0, tamanhoPares - 1);
