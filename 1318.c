@@ -12,14 +12,15 @@ void main (void)
 
 	unsigned short contador = 0, i, j, k;
 	unsigned short numBilhtes, numPessoas;
-	short codBilhete[10000], codBilheteCpy[10000];
-
+	
 	while (1)
 	{		
 		scanf("%hu %hu", &numBilhtes, &numPessoas);
 
 		if (numBilhtes == 0 && numPessoas == 0)
 			break;
+
+		short codBilhete[numPessoas], codBilheteCpy[numPessoas];
 
 		for (i = 0; i < numPessoas; i++)
 			scanf("%hd", &codBilhete[i]);
