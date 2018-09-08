@@ -5,10 +5,9 @@
 */
 
 #include <stdio.h>
-#include <stdbool.h>
 #include <ctype.h>
 
-void transformaInt(char *, short vet[], unsigned short);
+void transformaInt(char *, short vet[]);
 void retiraPonto(char *, char *);
 
 void main ()
@@ -24,7 +23,7 @@ void main ()
 		retiraPonto(cpf, cpfCpy);
 
 		//Converter caractere para inteiro;
-		transformaInt(cpfCpy, numCPF, 11);
+		transformaInt(cpfCpy, numCPF);
 
 		for (i = 0, j = 1, k = 9; i < 9; i++, j++, k--)
 		{	
@@ -49,7 +48,7 @@ void main ()
 	}
 }
 
-void transformaInt(char *str, short vet[], unsigned short tam)
+void transformaInt(char *str, short vet[])
 {
 
 	unsigned short i;
