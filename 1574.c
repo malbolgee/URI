@@ -57,7 +57,7 @@ void main ()
 			//Só existem 3 comandos: "LEFT", "RIGHT" e "SAME AS i"
 			//Por tanto, caso a entrada seja "SAME AS"
 			//Eu sei que o primeiro caractere da string será 'S';
-			else if(direcao[i].direcao[0], 'S')
+			else
 			{	
 
 				//O resultado da função pegaNum é então usado como índice em "direção[i].direcao"
@@ -100,20 +100,18 @@ short pegaNum(char *str)
 
 	unsigned short i, j, contador = 0;
 	unsigned short resultado = 0;
-	short numero[3];
+	short numero[3], tam;
 
-	while(str[i])
-	{
+	tam = strlen(str);
+
+	for (i = 0, j = 0; i < tam; i++)
 		if (isdigit(str[i]))
 		{
 
 			contador++;
 			numero[j++] = (int)str[i] - 48;
 
-		}
-
-		i++;
-	}
+		}	
 
 		for (i = 0, j = contador; i < contador; i++, j--)
 		{
@@ -126,6 +124,6 @@ short pegaNum(char *str)
 				resultado += numero[i];
 
 		}
-
+		
 	return resultado;
 }
