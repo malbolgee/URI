@@ -20,7 +20,7 @@ short pegaNum(char *str);
 void main ()
 {
 
-	unsigned short casos, instrucoes, aux, i = 1;
+	unsigned short casos, instrucoes, aux, i;
 	short posicao = 0;
 
 	scanf("%hu", &casos);
@@ -100,11 +100,10 @@ short pegaNum(char *str)
 
 	unsigned short i, j, contador = 0;
 	unsigned short resultado = 0;
-	short numero[3], tam;
+	short numero[3];
 
-	tam = strlen(str);
-
-	for (i = 0, j = 0; i < tam; i++)
+	while(str[i])
+	{
 		if (isdigit(str[i]))
 		{
 
@@ -112,6 +111,9 @@ short pegaNum(char *str)
 			numero[j++] = (int)str[i] - 48;
 
 		}
+
+		i++;
+	}
 
 		for (i = 0, j = contador; i < contador; i++, j--)
 		{
