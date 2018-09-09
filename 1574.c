@@ -20,7 +20,7 @@ short pegaNum(char *str);
 void main ()
 {
 
-	unsigned short casos, instrucoes, indice, numero = 0, aux, i = 1;
+	unsigned short casos, instrucoes, aux, i = 1;
 	short posicao = 0;
 
 	scanf("%hu", &casos);
@@ -54,9 +54,18 @@ void main ()
 				i++;
 				
 			}
+			//Só existem 3 comandos: "LEFT", "RIGHT" e "SAME AS i"
+			//Por tanto, caso a entrada seja "SAME AS"
+			//Eu sei que o primeiro caractere da string será 'S';
 			else if(direcao[i].direcao[0], 'S')
 			{	
 
+				//O resultado da função pegaNum é então usado como índice em "direção[i].direcao"
+				//Que é uma string;
+				//Caso a string para a qual o resultado de pegaNum direciona
+				//Torne essa condição verdadeira, então a variável 'posição' tem seu valor modificado
+				//E o valor encontrado na string resultante tem seu valor "duplicado"
+				//Na posição atual do struct;
 				if(strcmp(direcao[pegaNum(direcao[i].direcao)].direcao, "LEFT") == 0)
 				{	
 
@@ -79,6 +88,11 @@ void main ()
 
 	}
 }
+
+/*
+	A função pegaNum percorre a string caso a entrada
+	seja "SAME AS" e avalia a parte numerica.
+*/
 
 
 short pegaNum(char *str)
