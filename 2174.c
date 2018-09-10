@@ -28,7 +28,9 @@ void main ()
 	aux = casos;
 	
 
-	//Vetor do tipo string
+	//Vetor do tipo string com tamanho de aux + 1
+	//Para balançear o tamanho do vetor
+	//Uma vez que o índice 'i' começa do número 1;
 	string pokedex[aux + 1];
 
 	while (casos--)
@@ -37,11 +39,11 @@ void main ()
 		//Lê a string até que o enter seja pressionado;
 		scanf(" %[^\n]", pokedex[i].pokemon);
 
-		//Laço começca da string imediatamente anterior à posição atual;
+		//Laço começa da string imediatamente anterior à posição atual;
 		for (j = i - 1; j >= 1; j--)
 		{	
-			//Caso a string contina na posição j do vetor seja igual à contida na posição atual
-			//harepetido recebe 'true' e o laõ para
+			//Caso a string contida na posição 'j' do vetor seja igual à contida na posição atual
+			//'harepetido' recebe 'true' e o laço para;
 			//Pois se há pelo menos um repetido na 'pokedex', não há motivo para cotinuar a procura;
 			if (strcmp(pokedex[j].pokemon, pokedex[i].pokemon) == 0)
 			{
