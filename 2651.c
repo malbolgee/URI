@@ -32,12 +32,15 @@ bool zelda(char *nome)
 	char comparacao[6] = "zelda";
 
 	for (i = 0, j = 0; nome[i]; i++)
-	{
+	{	
+		// Comparação entra no if caso os caracteres sendo comparados sejam minúsculos ou maiúsculo;
 		if (nome[i] == comparacao[j] || nome[i] == comparacao[j] + 32 || nome[i] == comparacao[j] - 32)
 		{
 			j++;
 			contador++;
 
+			// Caso contador atinja o tamanho do vetor comparação;
+			// Não há necessidade de continuar varrendo a string;
 			if (contador == 5)
 				return true;
 		}
