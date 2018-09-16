@@ -35,16 +35,12 @@ void main ()
 			scanf("%c", &caractere);
 
 			if(isdigit(caractere))
-			{	
-				i++;
-				caracteres[i] = caractere;
-			}
+				caracteres[++i] = caractere;
+			
 			else
 				if(isdigit(caracteres[i]))
-				{
-					i++;
-					caracteres[i] = ' ';
-				}
+					caracteres[++i] = ' ';
+				
 				else
 					caracteres[i] = ' ';
 			
