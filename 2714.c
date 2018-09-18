@@ -70,8 +70,6 @@ bool senhaFixa(char *str)
 void pegaNum(char *str, char *str2)
 {
 
-	unsigned short tam;	
-
 	// Não há necessidade de testar as duas primeiras posições uma vez que não há números nelas;
 	// E isso faria o primeio laço while falhar pois 'R' e 'A' são != 0;
 	str += 2; 	
@@ -85,7 +83,6 @@ void pegaNum(char *str, char *str2)
 	while (*str)
 		*(str2++) = *(str++);
 	
-
 	// Caractere nulo na posição atual para marcar o fim da string;
 	*str2 = '\0';
 }
