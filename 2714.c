@@ -74,7 +74,7 @@ void pegaNum(char *str, char *str2)
 	// E isso faria o primeio laço while falhar pois 'R' e 'A' são != 0;
 	str += 2; 	
 
-	// Esse laço elimita todos os 0's à direita da string;
+	// Esse laço elimita todos os 0's à esquerda da string;
 	while (*str == '0')
 		str++;
 
