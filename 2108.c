@@ -15,7 +15,6 @@ void main ()
 
 		scanf(" %[^\n]", texto);
 
-		// printf("%s\n", texto);
 		if (strcmp(texto, "0") == 0)
 			break;
 
@@ -24,23 +23,28 @@ void main ()
 		k = 0;
 		maior = 0;
 		caracteres = 0;
-		
-		printf("caractere contino no índice 0 da string: %c\n", texto[0]);
-		printf("caractere contino no índice 1 da string: %c\n", texto[1]);
-		printf("%d\n", texto[1] == ' ');
 
 		while (texto[i])
-		{
-			while (texto[i] != ' ' || texto[i] != '\0')
-			{	
-				printf("Valor atual de texto[%hu]: %c\n",i , texto[i]);
+		{	
+
+			while (true)
+			{
+				if (texto[i] == ' ' || texto[i] == '\0')
+					break;
+
 				temp[j++] = texto[i++];
 				caracteres++;
-				// printf("valor atual de i: %hu\n", i);
+
 			}
 
-			printf("TESTE\n");
+			temp[j] = '\0';
+			
 			qtsCarac[k++] = caracteres;
+
+			for (int z = 0; z < k; z++)
+				printf("Valor atual do vetor na posição %hu %hd\n", k, qtsCarac[z]);
+
+			// printf("Esse é o valor de k: %d\n", k);
 
 			if (caracteres > maior)
 			{
@@ -50,11 +54,23 @@ void main ()
 
 			caracteres = 0;
 			i++;
+			j = 0;
+
 		}
 
+
+		// printf("Valor atual de k: %hu\n", k);
+
+		for (int l = 0; l < k; l++)
+		{
+			if (l != 0)
+				printf("-");
+			printf("%hd", qtsCarac[l]);
+		}
+
+		printf("\n");
+		memset(qtsCarac, 0, sizeof(qtsCarac));
 	}
 
-	printf("%s\n", maiorPalavra);
-	printf("%hd\n", caracteres);
-
+	printf("The biggest word: %s\n", maiorPalavra);
 }
