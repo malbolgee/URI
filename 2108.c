@@ -40,8 +40,8 @@ void main ()
 				if (texto[i] == ' ' || texto[i] == '\0')
 					break;
 				// Enquanto os caracteres da string forem diferentes de espaços
-				// Ou não for o final da string, passa esse(s) caractere para a 
-				// tring temporária e conta quantos caracteres foram passados;
+				// Ou não for o final da string, passa esse(s) caractere(s) para a 
+				// string temporária e conta quantos caractere(s) foram passados;
 				temp[j++] = texto[i++];
 				caracteres++;
 
@@ -53,8 +53,8 @@ void main ()
 			// Passa a quantidade de caractere(s) encontrado(s) na(s) palavra(s) da string;
 			qtsCarac[k++] = caracteres;	
 
-			// Se a quantidade de caractere(s) encontrada(s) na palvra atual
-			// For maior ou igual à quantidade de caractere(s) encontrada(s) na palavra anterior
+			// Se a quantidade de caractere(s) encontrada na palvra atual
+			// For maior ou igual à quantidade de caractere(s) encontrada na palavra anterior
 			// Então a palavra atual é maior qua a palavra anterior;
 			if (caracteres >= maior)
 			{
