@@ -6,55 +6,63 @@
 
 #include <stdio.h>
 
-void matrix(unsigned short int);
+void matrix(unsigned short);
 
 int main ()
 {
 
-  unsigned short int n;
+  unsigned short tamanho;
 
-  while (scanf("%hd", &n) != EOF)
+  while (scanf("%hd", &tamanho) != EOF)
   {
 
-    matrix(n);
+    matrix(tamanho);
 
   }
 }
 
-void matrix(unsigned short int n)
+void matrix(unsigned short tamanho)
 {
 
-  int m[n][n];
+  int m[tamanho][tamanho];
+  unsigned short linha, coluna;
 
-  for (unsigned short i = 0; i < n; i++)
-    for (unsigned short j = 0; j < n; j++)
+  // Preenche a matriz com 2 na diagonal principal;
+  // 3 na diagonal secundária;
+  // e 0 nas demais posições;
+  for (linha = 0; linha < tamanho; linha++)
+    for (coluna = 0; coluna < tamanho; coluna++)
     {
 
-      if (i == j)
-        m[i][j] = 2;
-      else if (i == n - j - 1)
-        m[i][j] = 3;
+      if (linha == coluna)
+        m[linha][coluna] = 2;
+      else if (linha == tamanho - coluna - 1)
+        m[linha][coluna] = 3;
       else
-        m[i][j] = 0;
+        m[linha][coluna] = 0;
 
     }
 
-  unsigned short int k = n/3;
-  //printf("Esse é o valor de K: %d\n", k);
-  unsigned short int l = n-k;
-  //printf("Esse é o valor de l: %d\n", l);
+  // Dica dada pela questão;
+  unsigned short inicio = tamanho/3;
+  // O problema é achar a condição de parada, ou seja, o fim;
+  // O final seria o tamanho menos o início, para sempre sobrar a
+  // mesma quantidade de colunas em ambos os lados;
+  unsigned short fim = tamanho - inicio;
 
-  for (unsigned short i = k; i < l; i++)
-    for (unsigned short j = k; j < l; j++)
-      m[i][j] = 1;
+  for (linha = inicio; linha < fim; linha++)
+    for (coluna = inicio; coluna < fim; coluna++)
+      m[linha][coluna] = 1;
 
-  m[n/2][n/2] = 4;
+  // O tamanho dividido por 2 sempre nos dá o elemento central;
+  m[tamanho/2][tamanho/2] = 4;
 
-  for (unsigned short i = 0; i < n; i++)
+  // Apenas imprime a matriz resultante;
+  for (linha = 0; linha < tamanho; linha++)
   {
 
-    for (unsigned short j = 0; j < n; j++)
-      printf("%d", m[i][j]);
+    for (coluna = 0; coluna < tamanho; coluna++)
+      printf("%d", m[linha][coluna]);
 
     printf("\n");
   }
