@@ -40,11 +40,9 @@ void kameHame(char *str, char *str2)
 	unsigned short contador = 0, aux;
 
 	// A primeira posição da string de saída recebe o caractere 'k';
-	*str2 = 'k';
 	// Incrementa a string de entrada e a string de saída em uma posição;
-	str2++;
-	str++;
-
+	*(str2++) = 'k'; str++;
+	
 	// Conta quantos caracteres 'a' existe(m) na primeira parte da string de entrada;
 	// A quantidade de caracteres 'a' nessa parte vai definir a quantidade de caracteres 'a' na string de saída;
 	while (*str == 'a')
@@ -64,10 +62,8 @@ void kameHame(char *str, char *str2)
 		while (*str == 'a')
 			*(str2++) = *(str++);
 
-		while (*str)
-			str++;
-
 		*str2 = '\0';
+
 	}
 	else
 	{	
@@ -83,5 +79,4 @@ void kameHame(char *str, char *str2)
 	}
 
 	*str2 = '\0';
-
 }
