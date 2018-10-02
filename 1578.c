@@ -37,7 +37,7 @@ void main ()
 			for (coluna = 0; coluna < ordem; coluna++)
 			{
 				maior = 0;
-				
+
 				// Acha o maior elemento da coluna;
 				for (k = 0; k < ordem; k++)
 					if (matriz[k][coluna] > maior)
@@ -51,14 +51,13 @@ void main ()
 				// log na base 10 nos da a quantidade de digitos de um número;
 				qtsDigitosAtual = ((floor(log10(maior))) + 1);
 				
-				// flag '*' antes da diretiva de formatação nos dá um recuo dinâmico
-				// Na impressão;
-
-				// Tive muitos problermas por causa disso;
+				// Tive muitos problemas por causa disso;
 				// Não pode haver espaços após o último elemento na coluna!
 				if (coluna != ordem && coluna != 0)
 					printf(" ");
 
+				// flag '*' antes da diretiva de formatação nos dá um recuo dinâmico
+				// Na impressão;
 				printf("%*.Lf", qtsDigitosAtual, matriz[linha][coluna]);
 			}
 
