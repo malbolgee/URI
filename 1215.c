@@ -38,11 +38,25 @@ int main ()
 			while (isalpha(tempEntrada[i]))
 			{
 				tempSaida[j++] = tolower(tempEntrada[i++]);
-				printf("Valor de tempSaida caractere: %c\n", tempSaida[j-1]);
+				// printf("Valor de tempSaida caractere: %c\n", tempSaida[j-1]);
 			}
+
+			if (tempEntrada[i] == '\0')
+			{
+				tempSaida[j] = '\0';
+				if (!stringSrc(tempSaida, dicionario, k))
+					strcpy(dicionario[k++].palavras, tempSaida);
+
+				j = 0;
+				memset(tempSaida, 0, sizeof(tempSaida));
+
+				break;
+
+			}
+
 			tempSaida[j] = '\0';
 
-			printf("Valor de tempSaida: %s\n", tempSaida);
+			// printf("Valor de tempSaida: %s\n", tempSaida);
 			// Enquanto o caractere atual não for uma letra, apenas avançe;
 			while (!isalpha(tempEntrada[i]))
 			{
