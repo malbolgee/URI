@@ -16,16 +16,18 @@ typedef struct{
 } string;
 
 bool stringSrc(char *, string *, unsigned);
-void ordenaAlpha(string *dicionario, unsigned tam);
+void qSortAlphaParcial(string *dicionario, int tam);
+void qSortAlphaParcialInterno(string *dicionario, int inicio, int fim);
 
 int main ()
 {
 
 	unsigned i, j, k = 0;
+
 	// Vetores para guardar temporariamente uma string;
 	char tempEntrada[201], tempSaida[201];
 	// Vetor onde irão ficar as palavras do dicionário;
-	string dicionario[5000];
+	string dicionario[5050];
 
 	memset(dicionario, 0, sizeof(dicionario));
 	while (scanf(" %[^\n]", tempEntrada) != EOF)
@@ -36,20 +38,22 @@ int main ()
 			// Enquanto o caractere na posição atual da string for uma letra;
 			// O passe para a string temporaria de saída já em minúsculo;
 			while (isalpha(tempEntrada[i]))
-			{
 				tempSaida[j++] = tolower(tempEntrada[i++]);
-				// printf("Valor de tempSaida caractere: %c\n", tempSaida[j-1]);
-			}
 
+			// Se o caractere que fez o laço a cima sair foi o caractere nulo
+			// Significa que a string chegou no fim
+			// Por isso deve-se executar todos os procedimentos de procura e inserção no dicionário;
+			// Logo em seguida, quebra-se o laço mais externo;
 			if (tempEntrada[i] == '\0')
 			{
 				tempSaida[j] = '\0';
+
 				if (!stringSrc(tempSaida, dicionario, k))
 					strcpy(dicionario[k++].palavras, tempSaida);
 
 				j = 0;
-				memset(tempSaida, 0, sizeof(tempSaida));
 
+				memset(tempSaida, 0, sizeof(tempSaida));
 				break;
 
 			}
@@ -80,10 +84,11 @@ int main ()
 		memset(tempEntrada, 0, sizeof(tempEntrada));
 	}
 
-	ordenaAlpha(dicionario, k);
+	qSortAlphaParcial(dicionario, k);
 
 	j = 0;
-
+	// Pode haver uma string nula na primeira posição do dicionário, se houver
+	// Inicie 'j' de 1;
 	if (strcmp(dicionario[0].palavras,"\0") == 0)
 		j = 1;
 
@@ -92,6 +97,7 @@ int main ()
 
 }
 
+// Função de procura de uma string no dicionario;
 bool stringSrc(char *str, string *dicionario, unsigned tam)
 {
 
@@ -105,27 +111,52 @@ bool stringSrc(char *str, string *dicionario, unsigned tam)
 
 }
 
-void ordenaAlpha(string *dicionario, unsigned tam)
+// QuickSort para ordenação em ordem alfabética;
+void qSortAlphaParcialInterno(string *dicionario, int inicio, int fim)
 {
 
-	short i = 1, j;
 	string pivo;
+	string temp;
+	int i, j;
 
-	while (i < tam)
+	if (fim - inicio > 0)
 	{
-		j = i - 1;
-		pivo = dicionario[i];
-
-		while (j >= 0 && strcmp(dicionario[j].palavras, pivo.palavras) > 0)
+		if (inicio < fim)
 		{
+			i = inicio;
+			j = fim;
+			pivo = dicionario[(i + j) / 2];
 
-			dicionario[j + 1] = dicionario[j];
-			j--;
+			do
+			{
 
+				while (strcmp(dicionario[i].palavras, pivo.palavras) < 0)
+					i++;
+				while (strcmp(dicionario[j].palavras, pivo.palavras) > 0)
+					j--;
+
+				if (i <= j)
+				{
+
+					temp = dicionario[i];
+					dicionario[i] = dicionario[j];
+					dicionario[j] = temp;
+					i++; j--;
+
+				}
+
+			} while (i <= j);
+
+			qSortAlphaParcialInterno(dicionario, inicio, j);
+			qSortAlphaParcialInterno(dicionario, i, fim);
 		}
-
-		dicionario[j + 1] = pivo;
-		i++;
-
 	}
+}
+
+// Função que dispara a chamada recursiva;
+void qSortAlphaParcial(string *dicionario, int tam)
+{
+
+	qSortAlphaParcialInterno(dicionario, 0, tam - 1);
+
 }
