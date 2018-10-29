@@ -26,13 +26,13 @@ void main ()
 
 	if (operacao == '+')
 		resultado = StrToInt(operandoASem7) + StrToInt(operandoBSem7);
-	else if (operacao == '*')
+	else if (operacao == 'x')
 		resultado = StrToInt(operandoASem7) * StrToInt(operandoBSem7);
 
 	sprintf(resultadoStr, "%ld", resultado);
 
 	retiraZero(resultadoStr, resultadoStrSem7);
-	printf("%s\n", resultadoStrSem7);
+	printf("%ld\n", StrToInt(resultadoStrSem7));
 
 }
 
