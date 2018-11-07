@@ -28,81 +28,61 @@ void main ()
 {
 
 	unsigned short numPalavras, qtsCargos;
-	unsigned short i, j;
-	char texto[10000], *palavraTmp, ponto;
-	string dicionario[10000];
+	char texto[10000], *palavraTmp;
 	unsigned long qtsSalarioTotal;
+	string dicionario[10000];
+	unsigned short i, j;
 
 	scanf("%hu %hu", &numPalavras, &qtsCargos);
 
-
 	funcao cargos[numPalavras];
-
 	memset(cargos, 0, sizeof(cargos));
+
 	for (i = 0; i < numPalavras; i++)
 			scanf(" %s %u", cargos[i].cargo, &cargos[i].comissao);
-	/*
-	// Teste de preechimento;
-	for (i = 0; i < numPalavras; i++)
-			printf("%s %u\n", cargos[i].cargo, cargos[i].comissao);
-	printf("\n");
-	*/
 
-	while (qtsCargos)
+	while (qtsCargos--)
 	{
 
-			printf("TESTE000001\n");
+		qtsSalarioTotal = 0;
+		while (true)
+		{
+
 			// Leitura do texto descritivo de funções;
 			scanf(" %[^\n]", texto);
 
-			printf("TESTE\n");
-			printf("%s\n", texto);
-			if (strcmp(texto, ".") != 0)
+			// O caractere '.' marca o final de um caso de teste;
+			// Podem haver várias strings em várias linhas diferentes de entrada;
+			if (strcmp(texto, ".") == 0)
+				break;
+
+			i = 0;
+			palavraTmp = strtok(texto, " ");
+			strcpy(dicionario[i++].palavra, palavraTmp);
+
+			// Separação da string em palavras individuais
+			// Usando o caractere espaço como token;
+			do
 			{
 
-				qtsCargos--;
-				// printf("TESTE01\n");
-				// printf("%s\n", texto);
-				// scanf(" %c", &ponto);
+				palavraTmp = strtok('\0', " ");
 
-				printf("TESTE01\n");
-				i = 0;
-				palavraTmp = strtok(texto, " ");
-				strcpy(dicionario[i++].palavra, palavraTmp);
+				if (palavraTmp)
+					strcpy(dicionario[i++].palavra, palavraTmp);
 
-				// Separação da string em palavras individuais
-				// Usando o caractere espaço como token;
-				do
-				{
+			} while (palavraTmp);
 
-					palavraTmp = strtok('\0', " ");
+			// Laço itera sobre as structs dicionario e cargos. Soma
+			// Os valores para os quais existem descrição na string texto;
+			for (j = 0; j < i; j++)
+				if (procuraPalavra(cargos, dicionario[j].palavra, numPalavras))
+					qtsSalarioTotal += cargos[posicao].comissao;
 
-					if (palavraTmp)
-						strcpy(dicionario[i++].palavra, palavraTmp);
-
-
-				} while (palavraTmp);
-
-				/*
-				// Segundo teste de preenchimento;
-				for (j = 0; j < i; j++)
-						printf("%s\n", dicionario[j].palavra);
-
-				printf("\n");
-				*/
-
-				// Laço itera sobre as structs dicionario e cargos e soma
-				// Os valores para os quais existem descrição na string texto;
-				qtsSalarioTotal = 0;
-				for (j = 0; j < i; j++)
-					if (procuraPalavra(cargos, dicionario[j].palavra, numPalavras))
-						qtsSalarioTotal += cargos[posicao].comissao;
-
-				// Impressão do resultado final;
-				printf("%lu\n", qtsSalarioTotal);
 		}
 
-		printf("TESTE0001\n");
+		// Impressão do resultado final;
+		printf("%lu\n", qtsSalarioTotal);
+
 	}
 
 }
@@ -115,7 +95,7 @@ bool procuraPalavra(funcao *cargos, char *palavra, unsigned short tam)
 
 	for (i = 0; i < tam; i++)
 		if (strcmp(cargos[i].cargo, palavra) == 0)
-		{	
+		{
 			posicao = i;
 			return true;
 		}
