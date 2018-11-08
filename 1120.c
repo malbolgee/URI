@@ -31,7 +31,7 @@ void main ()
         retiraDefeito(numero, numeroDefeituoso);
 
         // Função retira todos os zeros nas posições não significativas da string
-        // ou seja, qualquer zero do lado direito da string;
+        // ou seja, qualquer zero do lado esquerdo da string;
         retiraZeros(numero, numeroSemZero);
 
         // Se a string de retorno tiver tamanho 0, quer dizer que tudo foi tirado e nada sobrou
@@ -87,7 +87,7 @@ void retiraZeros(char *numero, char *numeroSemZero)
     }
 
     // Se 'j' for 0, quer dizer que não tinha nada para passar à string temporária;
-    // Salvo um zero na posição para forçar a entrada no próximo laço;
+    // Salvo o caracter zero na posição 'j' para forçar a entrada no próximo laço;
     if (j == 0)
         aux[j] = '0';
 
