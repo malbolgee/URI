@@ -32,7 +32,7 @@ void main ()
 		scanf("%u %u", &agenda[i].iniConsulta, &agenda[i].fimConsulta);
 
 	j = 0;
-	// Ordena o vetor de struct em ordem crescente pelo camo "fimConsulta";
+	// Ordena o vetor de struct em ordem crescente pelo campo "fimConsulta";
 	qsort(agenda, qtsConsultas, sizeof(consulta), compara);
 
 	// Se um inicio de consulta for maior ou igual ao fim de consulta, quer dizer
