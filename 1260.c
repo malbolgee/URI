@@ -27,7 +27,6 @@ typedef struct noArv{
 
 noArv* push(noArv *arvore, tipoDado dado);
 void show(noArv *arvore);
-void calcPorcent(noArv *arvore);
 void erase(noArv *arvore);
 unsigned qtsNos;
 
@@ -38,7 +37,7 @@ void main ()
 	unsigned qtsCasos;
 	char string[100] = { 0 };
 
-	// Tratamento para leitura das linhas em brabco (string vazia);
+	// Tratamento para leitura das linhas em branco (string vazia);
 	scanf("%u", &qtsCasos);
 	scanf("%c%[^\n]", &lixo, string);
 
@@ -113,7 +112,7 @@ void show(noArv *arvore)
 	{
 
 		show(arvore->esquerda);
-		printf("%s %.4lf\n", arvore->dado.nome, (arvore->dado.qtsUnidades * 100.f) / qtsNos);
+		printf("%s %.4lf\n", arvore->dado.nome, (arvore->dado.qtsUnidades * 100.0f) / qtsNos);
 		show(arvore->direita);
 
 	}
