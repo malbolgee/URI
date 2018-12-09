@@ -21,11 +21,11 @@ void main ()
 	while (scanf("%hu", &qtsTermos) != EOF)
 	{
 
-			scanf(" %[^\n]", derivada);
+		scanf(" %[^\n]", derivada);
 
-			parserDerivada(derivada);
-			printf("\n");
-			memset(derivada, 0, sizeof(derivada));
+		parserDerivada(derivada);
+		printf("\n");
+		memset(derivada, 0, sizeof(derivada));
 
 	}
 }
