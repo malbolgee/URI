@@ -41,8 +41,6 @@ long long qts1s(const long long *n, int i, int acc, int top)
 	if (bigNum[i][acc][top] != -1)
 		return bigNum[i][acc][top];
 
-	// printf("%lld\n", *n);
-	// sleep(2);
 	long long retorno = qts1s(n, i - 1, acc, !(((*n) >> i) & (long long)1) && top);
 
 	if (!top || (((*n) >> i) & 1))
