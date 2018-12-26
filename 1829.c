@@ -15,7 +15,6 @@
 void main ()
 {
 
-
 	char operacao;
 	unsigned short i, casos;
 	long long numA, numB, numC;
