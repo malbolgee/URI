@@ -27,16 +27,15 @@ void main ()
 unsigned short enigma(char *cifra, char *crib)
 {
 
+	bool igualdades = false;
 	unsigned short i, j, k;
 	unsigned limite = strlen(cifra) - strlen(crib);
-	unsigned short igualdades, qtsPosicoesPossiveis;
+	unsigned short qtsPosicoesPossiveis;
 
 	i = j = k = 0;
 	igualdades = 0;
 	qtsPosicoesPossiveis = 0;
 
-	// Se o limite for 0, quer dizer que a cifra e o crib têm o mesmo tamanho;
-	// é, por tanto, um caso especial;
 	if (!limite)
 	{
 
@@ -44,14 +43,16 @@ unsigned short enigma(char *cifra, char *crib)
 		{
 
 			if (cifra[i] == crib[j])
-				++igualdades;
+			{
+				igualdades = true;
+				break;
+			}
 
 			i++;
 			j++;
 
 		}
 
-		// Se não encontrou nenhuma igualdade, então só há uma posição possível;
 		if (!igualdades)
 			return 1;
 		else
@@ -59,20 +60,22 @@ unsigned short enigma(char *cifra, char *crib)
 
 	}
 
-	// Se as strings forem de tamanhos diferentes;
 	while (k <= limite)
 	{
 
 		j = 0;
-		// A cada iteração, o índice em que a string cifra começa é empurrado uma
-		// unidade para a direita;
 		i = k;
 		igualdades = 0;
 		while (cifra[i] && crib[j])
 		{
 
 			if (cifra[i] == crib[j])
-				++igualdades;
+			{
+
+				igualdades = true;
+				break;
+
+			}
 
 			++j;
 			++i;
@@ -81,8 +84,6 @@ unsigned short enigma(char *cifra, char *crib)
 
 		k++;
 
-		// Se na iteração passada não houve iguldades, então essa era uma posição possível
-		// para o crib;
 		if (!igualdades)
 			qtsPosicoesPossiveis++;
 
