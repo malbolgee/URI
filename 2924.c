@@ -58,7 +58,6 @@ char * soma(char *str1, char *str2, char *resultado)
 
 		}
 
-
 		if (vaium)
 			resultado[j++] = vaium + '0';
 
