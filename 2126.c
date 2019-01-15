@@ -1,49 +1,89 @@
+/*
+	@autor: Malbolge;
+	@data: 15/01/2019;
+	@nome: Procurando Subsequências;
+*/
+
 #include <stdio.h>
 #include <string.h>
 
-void main (void)
+#define true 1
+#define false 0
+#define MAXSIZESTR 100
+
+unsigned pos;
+_Bool compare(char *string, char *sub);
+char * contaSubstrings(char *string, char *sub);
+
+void main ()
 {
 
-    char numero1[34], numero2[34];
-    unsigned short contador = 0;
-    unsigned short i, j, sequencias = 0, posicao;
-    unsigned short caso = 0;
-    unsigned short aux = 0;
+	char *ptr;
+	unsigned cont, caso;
+	char sub[MAXSIZESTR];
+	char string[MAXSIZESTR];
 
+	caso = 0;
+	while (scanf("%s %s", sub, string) != EOF)
+	{
 
-    while (scanf("%s %s", numero1, numero2) != EOF)
-    {
-      unsigned short tamNum1 = strlen(numero1), tamNum2 = strlen(numero2);
-      printf("Valor do tamanho de da String 1: %d\n", tamNum1);
-      i = 0;
-      while (numero2[i])
-      {
-        j = 0;
-        while (numero1[j])
-        {
+		pos = cont = 0;
+		ptr = contaSubstrings(string, sub);
 
-          if (numero1[j] == numero2[i])
-          {
+		while (ptr != NULL)
+			++cont, ptr = contaSubstrings(ptr + 1, sub);
 
-            contador++;
-            printf("Valor atual de contador: %d\n", contador);
-            printf("Valor atual de i: %d\n", i);
-            printf("Valor atual de j: %d\n", j);
-            i++;
-            j++;
-            if (contador == tamNum1)
-            {
-              sequencias++;
-              printf("Valor autal de sequencias: %d\n", sequencias);
-              contador = 0;
-            }
+		if (cont)
+			printf("Caso #%d:\nQtd.Subsequencias: %d\nPos: %d\n\n", ++caso, cont, pos);
+		else
+			printf("Caso #%d:\nNao existe subsequencia\n\n", ++caso);
 
-          }
+	}
 
-        }
+}
 
-        //printf("Valor atual de contador: %d\n", contador);
-        //printf("Valor atual de sequencias: %d\n", sequencias);
-      }
-    }
+_Bool compara(char *string, char *sub)
+{
+
+	unsigned i, j;
+
+	i = j = 0;
+	while (string[i] && sub[j])
+	{
+
+		if (string[i] != sub[j])
+			return false;
+
+		++i;
+		++j;
+
+	}
+
+	return (sub[j] == '\0');
+
+}
+
+char* contaSubstrings(char *string, char *sub)
+{
+
+	unsigned i;
+
+	i = 0;
+	while (string[i])
+	{
+
+		if ((string[i] == *sub) && compara(&string[i], sub))
+		{
+
+			pos += i + 1;
+			return &string[i];
+
+		}
+
+		++i;
+
+	}
+
+	return NULL;
+
 }
