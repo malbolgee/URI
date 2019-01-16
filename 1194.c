@@ -1,54 +1,102 @@
 /*
 	@autor: Malbolge;
-	@data: 20/07/2018;
-	@nome: Experiências;
+	@data: 15/01/2019;
+	@nome: Prefixa, Infixa e Posfixa;
 */
 
-#include "stdio.h"
-#include "string.h"
+#include <stdio.h>
+#include <stdlib.h>
 
+#define MAXSIZE 1000
 
-int main (){
+typedef struct noArv{
 
-int testes, coelho = 0, sapo = 0, rato = 0, i, temp = 0, total = 0;
-float pcoelho, psapo, prato;
-char letra;
+	char letra;
+	struct noArv *direita;
+	struct noArv *esquerda;
 
-scanf("%d", &testes);
+} noArv;
 
-for (i = 0; i < testes; i++){
+noArv* novoNo(char letra);
+void showposfixa(noArv *arvore);
+int src(char *str, int inicio, int fim, char letra);
+noArv* tree(char *infixa, char *prefixa, int inInicio, int inFim);
 
-	scanf("%d %c", &temp, &letra);
+short indice;
 
-	if (letra == 'C'){
+void main ()
+{
 
-		coelho += temp;
+	short qtsCasos;
+	short qtsNodes, i;
+	char prefixa[MAXSIZE], infixa[MAXSIZE];
 
-	}else if (letra == 'R'){
+	scanf("%hu", &qtsCasos);
 
-		rato += temp;
+	while (qtsCasos--)
+	{
 
-	}else if (letra == 'S'){
-
-		sapo += temp;
+		scanf("%hu %s %s%*c", &qtsNodes, prefixa, infixa);
+		indice = 0;
+		noArv *raiz = tree(infixa, prefixa, 0, qtsNodes - 1);
+		showposfixa(raiz);
+		printf("\n");
 
 	}
 
-	total += temp;
 }
 
-	printf("Total: %d cobaias\n", total);
-	printf("Total de coelhos: %d\n", coelho);
-	printf("Total de ratos: %d\n", rato);
-	printf("Total de sapos: %d\n", sapo);
+noArv* novoNo(char letra)
+{
 
-	pcoelho = coelho*100.0/total;
-	prato = rato*100.0/total;
-	psapo = sapo*100.0/total;
+	noArv *no = (noArv *) malloc(sizeof(noArv));
+	no->letra = letra;
+	no->esquerda = NULL;
+	no->direita = NULL;
 
+	return no;
+}
 
-	printf("Percentual de coelhos: %.2f %%\n", pcoelho);
-	printf("Percentual de ratos: %.2f %%\n", prato);
-	printf("Percentual de sapos: %.2f %%\n", psapo);
+int src(char *str, int inicio, int fim, char letra)
+{
+
+	short i;
+	for (i = inicio; i <= fim; ++i)
+		if (str[i] == letra)
+			return i;
+
+	return -1;
+
+}
+
+noArv* tree(char *infixa, char *prefixa, int inInicio, int inFim)
+{
+
+	int infixaIndice;
+
+	if (inInicio > inFim)
+		return NULL;
+
+	noArv *no = novoNo(prefixa[indice++]);
+	if (inInicio == inFim)
+		return no;
+
+	infixaIndice = src(infixa, inInicio, inFim, no->letra);
+	no->esquerda = tree(infixa, prefixa, inInicio, infixaIndice - 1);
+	no->direita = tree(infixa, prefixa, infixaIndice + 1, inFim);
+
+	return no;
+
+}
+
+void showposfixa(noArv *no)
+{
+
+	if (no == NULL)
+		return;
+
+	showposfixa(no->esquerda);
+	showposfixa(no->direita);
+	printf("%c", no->letra);
 
 }
