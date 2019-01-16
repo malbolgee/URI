@@ -51,8 +51,7 @@ noArv* novoNo(char letra)
 
 	noArv *no = (noArv *) malloc(sizeof(noArv));
 	no->letra = letra;
-	no->esquerda = NULL;
-	no->direita = NULL;
+	no->esquerda = no->direita = NULL;
 
 	return no;
 }
