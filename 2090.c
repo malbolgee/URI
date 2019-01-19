@@ -5,11 +5,6 @@
 */
 
 #include <stdio.h>
-#include <string.h>
-
-#define true 1
-#define false 0
-#define MAXSIZE 100100
 
 typedef struct string{
 
@@ -17,45 +12,39 @@ typedef struct string{
 
 } string;
 
+#define true 1
+#define false 0
+#define MAXSIZE 100100
+
 void main ()
 {
 
 	unsigned i, j;
-	unsigned n, k, tmp;
+	unsigned n, k;
 	string shepa[MAXSIZE];
 
-	while (true)
+	while (scanf("%d %d", &n, &k), n)
 	{
 
-
-		scanf("%u %u", &n, &k);
-
-		if (!n)
-			break;
-
-		for (i = 0; i < n; ++i)
+		long long hi, low, mid;
+		for (i = 1; i <= n; ++i)
 			scanf("%s", shepa[i].produto);
 
-		tmp = 1;
-		for (i = 0; i < n; ++i)
-			for (j = 0; j <= i; ++j)
-			{
-				if (tmp == k)
-				{
+		low = 1; hi = n;
+		while (low < hi)
+		{
 
-					printf("%s\n", shepa[j].produto);
-					// Colocar uma flag pra sair do for mais externo
-					// Deixa o código lento;
-					goto end;
+			mid = low + (hi - low) / 2;
+			if (mid * (mid + 1) / 2 >= k)
+				hi = mid;
+			else
+				low = mid + 1;
 
-				}
+		}
 
-				++tmp;
-
-			}
-
-		end: ;
+		printf("%s\n", shepa[k - ((low - 1) * low / 2)].produto);
 
 	}
+
 
 }
