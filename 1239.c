@@ -1,148 +1,63 @@
 /*
 	@autor: Malbolge;
-	@data: 09/11/2018;
+	@data: 04/02/2019;
 	@nome: Atalhos Bloggo;
 */
 
 #include <stdio.h>
 #include <string.h>
 
-void atalhosItalico(char *, char *);
-void atalhosNegrito(char *, char *);
+#define true 1
+#define false 0
+#define MAXSIZE 150
+#define SET memset(string, 0, sizeof(string))
+
+void bloggo(char *);
+char string[MAXSIZE];
 
 void main ()
 {
 
+	char lixo;
 
-	char texto[500] = { 0 };
-	char textoItalico[500] = { 0 };
-	char textoNegrito[500] = { 0 };
-
-	while (scanf(" %[^\n]", texto) != EOF)
-	{
-
-
-		atalhosItalico(texto, textoItalico);
-		atalhosNegrito(textoItalico, textoNegrito);
-
-		printf("%s\n", textoNegrito);
-
-
-	}
+	while (fgets(string, 150, stdin) != NULL)
+		bloggo(string), SET;
 
 }
 
-void atalhosItalico(char *texto, char *textoSaida)
+void bloggo(char *texto)
 {
 
-	unsigned short i, j, k;
-	unsigned short qtsAparicaoSublinhado;
-	char *abreItalico = "<i>";
-	char *fechaItalico = "</i>";
+	unsigned short i;
+	_Bool italico, negrito;
 
-	i = j = 0;
-	qtsAparicaoSublinhado = 0;
-	while (texto[i])
+	italico = negrito = false;
+	for (i = 0; texto[i]; ++i)
 	{
 
-		while (texto[i] != '_')
+		if (texto[i] == '_' && italico == false)
 		{
-			textoSaida[j++] = texto[i++];
-
-			if (texto[i] == '\0')
-				break;
+			printf("<i>"), italico = true;
+			continue;
 		}
-
-		if (texto[i] == '\0')
-			break;
-
-		k = 0;
-		if (texto[i] == '_' && (qtsAparicaoSublinhado % 2 == 0))
-		{	
-			i++;	
-			qtsAparicaoSublinhado++;
-			while (abreItalico[k])
-				textoSaida[j++] = abreItalico[k++];
+		if (texto[i] == '_' && italico == true)
+		{
+			printf("</i>"), italico = false;
+			continue;
 		}
-		
-		k = 0;
-		if (texto[i] == '_' && qtsAparicaoSublinhado % 2 != 0)
-		{		
-				i++;
-				qtsAparicaoSublinhado++;	
-				while (fechaItalico[k])
-					textoSaida[j++] = fechaItalico[k++];
-
-				textoSaida[j++] = ' ';
-
-				if (qtsAparicaoSublinhado >= 2)
-					qtsAparicaoSublinhado = 0;
+		if (texto[i] == '*' && negrito == false)
+		{
+			printf("<b>"), negrito = true;
+			continue;
 		}
-
-		
-		i++;
-
-		if (texto[i] == '\0')
-			break;
+		if (texto[i] == '*' && negrito == true)
+		{
+			printf("</b>"), negrito = false;
+			continue;
+		}
+		if (texto[i] != '_' || texto[i] != '*')
+			printf("%c", texto[i]);
 
 	}
-
-	textoSaida[j] = '\0';
-
-}
-
-void atalhosNegrito(char *texto, char *textoSaida)
-{
-
-	unsigned short i, j, k;
-	unsigned short qtsAparicaoAsterisco;
-	char *abreNegrito = "<b>";
-	char *fechaNegrito = "</b>";
-
-	i = j = 0;
-	qtsAparicaoAsterisco = 0;
-	while (texto[i])
-	{
-
-		while (texto[i] != '*')
-		{
-			textoSaida[j++] = texto[i++];
-
-			if (texto[i] == '\0')
-				break;
-		}
-
-		if (texto[i] == '\0')
-			break;
-
-		k= 0;
-		if (texto[i] == '*' && (qtsAparicaoAsterisco % 2 == 0))
-		{	
-			i++;	
-			qtsAparicaoAsterisco++;
-			while (abreNegrito[k])
-				textoSaida[j++] = abreNegrito[k++];
-		}
-
-		k = 0;
-		if (texto[i] == '*' && qtsAparicaoAsterisco % 2 != 0)
-		{		
-				i++;
-				qtsAparicaoAsterisco++;	
-				while (fechaNegrito[k])
-					textoSaida[j++] = fechaNegrito[k++];
-
-				textoSaida[j++] = ' ';
-		}
-	
-
-		if (qtsAparicaoAsterisco >= 2)
-			qtsAparicaoAsterisco = 0;
-
-		i++;
-
-	}
-
-	textoSaida[j] = '\0';
 
 }
