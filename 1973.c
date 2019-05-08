@@ -1,26 +1,55 @@
 /*
 	@autor: Malbolge;
-	@data: 15/08/2018;
+	@data: 06/05/2019;
 	@nome: Jornada nas Estrelas;
 */
 
-#include "stdio.h"
+#include <stdio.h>
 
-int main ()
+#define true 1
+#define false 0
+#define MAXSIZE 1000010
+
+typedef long long unsigned llu;
+
+char seen[MAXSIZE];
+
+void main ()
 {
+	
+	int i;
+	unsigned n;	
+	scanf("%u", &n);
 
-	int numero, i, roubados = 0, nroubados = 0, indice = 1;
+	llu tot = 0;
+	unsigned sitios[n];
+	for (int i = 0; i < n; ++i)
+		scanf("%u", &sitios[i]), tot += sitios[i];
 
+	i = 0;
+	llu ans = 0;
+	while (i >= 0 && i < n)
+	{
 
-	scanf("%d", &numero);
-	int carneiros[numero];
+		if (!seen[i])
+			++ans;
 
-	for (i = 0; i < numero; i++)
-		scanf("%d", &carneiros[i]);
+		seen[i] = true;
 
-	if (carneiros[i]) != 0
-		soma = carneiros[i] - carneiros[i] + 1;
-		carneiros[i] = carneiros[i] - 1;
+		if (sitios[i] & 1)
+			--tot, --sitios[i++];
+		else
+		{
 
+			if (sitios[i])
+				--tot, --sitios[i];
+
+			--i;
+
+		}
+
+	}
+
+	printf("%llu %llu\n", ans, tot);
 
 }
