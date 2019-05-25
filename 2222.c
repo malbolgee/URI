@@ -13,34 +13,39 @@ typedef long long unsigned llu;
 
 llu grid[10010];
 
-unsigned count(llu x);
+void scanff(int *a);
+unsigned csb(llu x);
+void print_dln(int n);
 
 int main (int argc, char **argv)
 {
 
 	int t, n, i, j, k;
-	scanf("%d", &t);
-
+	
+	scanff(&t);
 	while (t--)
 	{
 
-		scanf("%d", &n);
-		for (i = 0; i < n; ++i)
+		scanff(&n);
+		for (i = 1; i <= n; ++i)
 		{
 
 			grid[i] = 0;
-			scanf("%d", &j);
+			scanff(&j);
 			while (j--)
-				scanf("%d", &k), grid[i] |= (1LL << k);
+				scanff(&k), grid[i] |= (1LL << k);
 
 		}
 
-		scanf("%d", &n);
+		scanff(&n);
 		while (n--)
 		{
 
-			scanf("%d %d %d", &k, &i, &j);
-			printf("%u\n", k == 1 ? count(grid[--i] & grid[--j]) : count(grid[--i] | grid[--j]));
+			scanff(&k), scanff(&i), scanff(&j);
+			if (k == 1)
+				print_dln(csb(grid[i] & grid[j]));
+			else
+				print_dln(csb(grid[i] | grid[j]));
 
 		}
 
@@ -50,7 +55,7 @@ int main (int argc, char **argv)
 
 }
 
-unsigned count(llu x)
+unsigned csb(llu x)
 {
 
 	unsigned ans = 0;
@@ -58,5 +63,36 @@ unsigned count(llu x)
 		ans += x & 1, x >>= 1;
 
 	return ans;
+
+}
+
+inline void scanff(int *a)
+{
+
+    register char c = 0;
+    *a = 0;
+	c = getchar_unlocked();
+    while (c >= 48)
+        *a = *a * 10 + (c - '0'), c = getchar_unlocked();
+
+}
+
+inline void print_dln(int n) 
+{
+
+	char i = 10;
+	char output_buffer[11];
+	output_buffer[10] = '\n';
+	do{
+
+		output_buffer[--i] = (n % 10) + '0', n /= 10;
+
+	}while(n);
+
+	do{
+
+		putchar_unlocked(output_buffer[i]);
+
+	}while(++i < 11);
 
 }
