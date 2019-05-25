@@ -1,23 +1,21 @@
 /*
 	@autor: Malbolge;
-	@data: 19/05/2019;
+	@data: 25/05/2019;
 	@nome: Brincando com Conjuntos;
 */
 
 #include <stdio.h>
-#include <string.h>
 
 #define true 1
 #define false 0
-#define MIN(x, y) x < y ? x : y
-#define MAX(x, y) x > y ? x : y
 
-int grid[10010][65];
+typedef long long unsigned llu;
 
-int funion(int, int);
-int fintersection(int, int);
+llu grid[10010];
 
-int main(int argc, char **argv)
+unsigned count(llu x);
+
+int main (int argc, char **argv)
 {
 
 	int t, n, i, j, k;
@@ -27,14 +25,13 @@ int main(int argc, char **argv)
 	{
 
 		scanf("%d", &n);
-		memset(grid, 0, sizeof(grid));
-
 		for (i = 0; i < n; ++i)
 		{
 
+			grid[i] = 0;
 			scanf("%d", &j);
 			while (j--)
-				scanf("%d", &k), grid[i][k] = 1;
+				scanf("%d", &k), grid[i] |= (1LL << k);
 
 		}
 
@@ -43,7 +40,7 @@ int main(int argc, char **argv)
 		{
 
 			scanf("%d %d %d", &k, &i, &j);
-			printf("%d\n", k == 1 ? fintersection(--i, --j) : funion(--i, --j));
+			printf("%u\n", k == 1 ? count(grid[--i] & grid[--j]) : count(grid[--i] | grid[--j]));
 
 		}
 
@@ -53,24 +50,13 @@ int main(int argc, char **argv)
 
 }
 
-int fintersection(int x, int y)
+unsigned count(llu x)
 {
 
-	int i, soma = 0;
-	for (i = 1; i <= 60; ++i)
-		soma += MIN(grid[x][i], grid[y][i]);
+	unsigned ans = 0;
+	while (x)
+		ans += x & 1, x >>= 1;
 
-	return soma;
-
-}
-
-int funion(int x, int y)
-{
-
-	int i, soma = 0;
-	for (i = 1; i <= 60; ++i)
-		soma += MAX(grid[x][i], grid[y][i]);
-
-	return soma;
+	return ans;
 
 }
