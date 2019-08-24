@@ -9,138 +9,80 @@
 #include <stdlib.h>
 #include <string.h>
 
-void cpfPropinaSrc(char *, char *, char *);
-void secondSrc(char *, char *, char *);
-unsigned short somaNum(short *, unsigned short);
-unsigned short somaNumStr(char *vet);
+#define true 1
+#define false 0
 
-void main ()
+void solve();
+char cpf[15], prop[30];
+char string1[70], string2[70];
+
+int main(int argc, char **argv)
 {
 
-	char texto[122], texto2[61], cpf[12], propina[12];
+	scanf("%s %s", string1, string2);
+	solve();
 
-	scanf("%s", texto);
-	scanf(" %s", texto2);
+	return 0;
 
-	// Concatena a string 2 com a string 1;
-	// Dessa forma, posso trabalhar com apenas uma string;
-	strcat(texto, texto2);
+}
 
-	printf("%s\n", texto);
-	cpfPropinaSrc(texto, cpf, propina);
+void solve()
+{
+
+	double v, x;
+	int i, j, c;
+
+	i = j = c = 0;
+    for (; string1[i] && c < 11; ++i)
+		if (isdigit(string1[i]))	
+			cpf[j++] = string1[i], ++c;
+
+	c = j = 0;
+    for (; string1[i]; ++i)
+		if (isdigit(string1[i]))
+			prop[j++] = string1[i];
+		else if (string1[i] == '.')
+		{
+
+			prop[j++] = string1[i++];
+            for (; string1[i] && c < 2; ++i)
+				if (isdigit(string1[i]))
+					prop[j++] = string1[i], ++c;
+				
+			break;
+					
+		}
+
+	prop[j] = 0;
+	
+	if (j != 0)
+		sscanf(prop, "%lf", &v);
+
+	memset(prop, 0, sizeof(prop));
+
+	i = j = c = 0;
+    for (; string2[i]; ++i)
+		if (isdigit(string2[i]))
+			prop[j++] = string2[i];
+		else if (string2[i] == '.')
+		{
+
+			prop[j++] = string2[i++];
+
+            for (; string2[i] && c < 2; ++i)
+				if (isdigit(string2[i]))
+					prop[j++] = string2[i], ++c;
+
+			break;
+
+		}
+
+	prop[j] = 0;
+
+	if (j != 0)
+		sscanf(prop, "%lf", &x), v += x;
 
 	printf("cpf %s\n", cpf);
-	printf("propina: %s\n", propina);
-
-}
-
-void cpfPropinaSrc(char *string, char *cpf, char *propina)
-{
-
-	unsigned short contador = 0;
-	short i, *decimal;
-	short numero, soma;
-
-	decimal = (short*) malloc(sizeof(short) * 2);
-
-	while (contador != 11)
-	{
-
-		if (isdigit(*string))
-		{
-			*(cpf++) = *(string++);
-			contador++;
-		}
-		else
-			string++;
-	}
-
-	*cpf = '\0';
-
-	while (*string != '.')
-	{
-		if (isdigit(*string))
-			*(propina++) = *(string++);
-		else
-			string++;
-	}
-	
-	*propina = '\0';
-
-	soma = somaNumStr(propina);
-	printf("Esse é o valor de soma: %hu\n", soma);
-
-	
-	i = 0;
-	string++;
-	contador = 0;
-	while (contador != 2)
-	{
-
-		decimal[i++] = (int) *string - 48;
-		contador++;
-		string++;
-
-	}
-
-	numero = somaNum(decimal, contador);
-	printf("Esse é o resultado de soma num: %hu\n", numero);
-
-
-}
-
-unsigned short somaNum(short *vet, unsigned short tamanho)
-{
-
-	unsigned short numero = 0, aux;
-	unsigned short i;
-
-	for (i = 0, aux = tamanho; i < tamanho; i++, aux--)
-	{
-
-		if (aux == 3)
-			numero += *(vet++) * 100;
-		else if (aux == 2)
-			numero += *(vet++) * 10;
-		else if (aux == 1)
-			numero += *(vet++);
-
-	}
-
-	return numero;
-
-}
-
-unsigned short somaNumStr(char *vet)
-{
-
-	unsigned short numero = 0, aux;
-	unsigned short i, contador = 0;
-	short decimal[10];
-
-	i = 0;
-
-	while (*vet)
-	{
-
-		decimal[i++] = (int) *vet - 48;
-		contador++;
-		vet++;
-
-	}
-
-	for (i = 0, aux = contador; i < contador; i++, aux--)
-	{
-
-		if (aux == 3)
-			numero += *(vet++) * 100;
-		else if (aux == 2)
-			numero += *(vet++) * 10;
-		else if (aux == 1)
-			numero += *(vet++);
-
-	}
-
-	return numero;
+	printf("%.2lf\n", v);
 
 }
